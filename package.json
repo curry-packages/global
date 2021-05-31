@@ -11,9 +11,10 @@
         "directory": ">= 3.0.0, < 4.0.0",
         "process"  : ">= 3.0.0, < 4.0.0"
     },
+    "exportedModules": [ "Data.Global" ],
     "testsuite": {
         "src-dir": "test",
-        "modules": [ "TestGlobal", "TestDataGlobal", "TestGlobalHandles" ]
+        "modules": [ "TestDataGlobal", "TestGlobalHandles" ]
     },
     "compilerCompatibility": {
         "pakcs"   : ">= 3.4.0, < 4.0.0",
