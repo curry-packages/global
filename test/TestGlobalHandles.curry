@@ -11,33 +11,30 @@ import Test.Prop
 
 ------------------------------------------------------------------------------
 -- A temporary global entity holding a file handle:
-myHandle :: GlobalT Handle
-myHandle = globalTemporary (error "no handle")
+myHandle :: GlobalT (Maybe Handle)
+myHandle = globalT "TestGlobalHandles.myHandle" Nothing
 
 setOutHandle :: IO ()
 setOutHandle = do
   h <- openFile "XXXOUT" WriteMode
-  writeGlobalT myHandle h
+  writeGlobalT myHandle (Just h)
 
 writeMyFile :: IO ()
-writeMyFile = do
-  h <- readGlobalT myHandle
-  hPutStrLn h "ABC"
+writeMyFile =
+  readGlobalT myHandle >>= maybe (return ()) (\h -> hPutStrLn h "ABC")
 
 closeMyFile :: IO ()
-closeMyFile = do
-  h <- readGlobalT myHandle
-  hClose h
+closeMyFile =
+  readGlobalT myHandle >>= maybe (return ()) hClose
 
 setInHandle :: IO ()
 setInHandle = do
   h <- openFile "XXXOUT" ReadMode
-  writeGlobalT myHandle h
+  writeGlobalT myHandle (Just h)
 
 readMyFile :: IO String
-readMyFile = do
-  h <- readGlobalT myHandle
-  hGetContents h
+readMyFile =
+  readGlobalT myHandle >>= maybe (return "") hGetContents
 
 testGlobalHandles :: PropIO
 testGlobalHandles =

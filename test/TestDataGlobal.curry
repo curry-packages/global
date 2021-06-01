@@ -14,7 +14,7 @@ import Test.Prop
 ------------------------------------------------------------------------------
 -- Testing a simple integer temporary global entity:
 points :: GlobalT Int
-points = globalTemporary (div 1 1)
+points = globalT "TestDataGlobal.points" (div 1 1)
 
 rwglobal :: IO (Int,Int)
 rwglobal = do
@@ -28,7 +28,7 @@ testSimpleIntReadGlobalWriteGlobal = rwglobal `returns` (1,42)
 ------------------------------------------------------------------------------
 -- Testing a temporary global entity containing a list structure:
 nats :: GlobalT [Int]
-nats = globalTemporary []
+nats = globalT "TestDataGlobal.nats" []
 
 listrwglobal :: IO ([Int],[Int])
 listrwglobal = do
@@ -48,10 +48,10 @@ testSimpleIntlistReadGlobalWriteGlobal =
 type GTInt = GlobalT Int
 
 gint1 :: GTInt
-gint1 = globalTemporary 0
+gint1 = globalT "TestDataGlobal.gint1" 0
 
 gint2 :: GTInt
-gint2 = globalTemporary 42
+gint2 = globalT "TestDataGlobal.gint2" 42
 
 rwglobals :: IO [Int]
 rwglobals = do

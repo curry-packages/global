@@ -1,6 +1,6 @@
 {
     "name": "global",
-    "version": "3.1.0",
+    "version": "3.2.0",
     "author": "Michael Hanus <mh@informatik.uni-kiel.de>",
     "synopsis": "Library for handling global entities in programs",
     "category": [ "Programming" ],
@@ -11,13 +11,15 @@
         "directory": ">= 3.0.0, < 4.0.0",
         "process"  : ">= 3.0.0, < 4.0.0"
     },
+    "compilerCompatibility": {
+        "pakcs"   : ">= 3.4.1, < 4.0.0",
+        "kics2"   : ">= 3.0.0, < 4.0.0",
+        "curry2go": ">= 1.0.0"
+    },
     "exportedModules": [ "Data.Global" ],
     "testsuite": {
         "src-dir": "test",
         "modules": [ "TestDataGlobal", "TestGlobalHandles" ]
-    },
-    "compilerCompatibility": {
-        "pakcs"   : "= 3.4.0"
     },
     "source": {
         "git": "https://git.ps.informatik.uni-kiel.de/curry-packages/global.git",
